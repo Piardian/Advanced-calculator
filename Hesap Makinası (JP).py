@@ -1,6 +1,11 @@
 import tkinter as tk
 from tkinter import *
-window = Tk()
+
+# Küresel değişkenler
+hesap = ''
+s1 = 0
+yuzde = False
+
 def yaz(x):
     s = len(giris.get())
     giris.insert(s, str(x))
@@ -8,30 +13,37 @@ def yaz(x):
 def islemler(x):
     global hesap
     global s1
+    global yuzde
     if x in "+-*/":
         hesap = x
-        s1 = float(giris.get())
+        try:
+            s1 = float(giris.get())
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
         giris.delete(0, 'end')
     elif x == "%":
-        global yuzde
         yuzde = True
-        s1 = float(giris.get())  # Yüzde işlemi için s1'i tanımla
-        giris.delete(0, 'end')  # Yüzde işlemi için girilen değeri temizle
+        try:
+            s1 = float(giris.get())
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        giris.delete(0, 'end')
     else:
         giris.insert(END, x)
 
 def hesapla():
     global s1
     global yuzde
-
-    if 'yuzde' in globals() and yuzde:
-        yuzde_degeri = float(giris.get())
-        sonuc = (yuzde_degeri / 100) * s1
-        sonuc_str = str(sonuc)
-        giris.delete(0, 'end')  # Sonucu giris kutusuna eklemeden önce kutuyu temizleyin
-        giris.insert(0, sonuc_str)
-    else:
-        try:
+    try:
+        if yuzde:
+            yuzde_degeri = float(giris.get())
+            sonuc = (yuzde_degeri / 100) * s1
+            yuzde = False
+        else:
             s2 = float(giris.get())
             if hesap == '+':
                 sonuc = s1 + s2
@@ -41,22 +53,21 @@ def hesapla():
                 if s2 != 0:
                     sonuc = s1 / s2
                 else:
-                    sonuc_str = "Hata: Sıfıra bölme hatası!"
+                    giris.delete(0, 'end')
+                    giris.insert(0, "Hata: Sıfıra bölme")
+                    return
             elif hesap == '*':
                 sonuc = s1 * s2
-            sonuc_str = str(sonuc)
 
-            if sonuc % 1 == 0:
-                sonuc_str = str(int(sonuc))
-            
-            giris.delete(0, 'end')  # Sonucu giris kutusuna eklemeden önce kutuyu temizleyin
-            giris.insert(0, sonuc_str)
-        except ValueError: 
-            giris.delete(0, 'end')
-            giris.insert(0, "Hata: Geçersiz işlem!")
+        sonuc_str = str(sonuc)
+        if sonuc % 1 == 0:
+            sonuc_str = str(int(sonuc))
 
-    if 'yuzde' in globals():
-        yuzde = False  # Yüzde işleminin yapıldığını sıfırla
+        giris.delete(0, 'end')
+        giris.insert(0, sonuc_str)
+    except ValueError:
+        giris.delete(0, 'end')
+        giris.insert(0, "Hata")
 
 def sil():
     giris.delete(len(giris.get()) - 1)
@@ -64,7 +75,7 @@ def sil():
 def temizle():
     giris.delete(0, 'end')
 
-
+window = Tk()
 window.title('Hesap Makinası')
 window.geometry("300x400")
 window.configure(background='black')
@@ -92,11 +103,25 @@ Button(window, width=10, text="0", fg="black", font=("Helvetica", 16), backgroun
 Button(window, width=4, text="+", fg="black", font=("Helvetica", 16), background='white', command=lambda: islemler("+")).place(x=230, y=280)
 Button(window, width=4, text="-", fg="black", font=("Helvetica", 16), background='white', command=lambda: islemler("-")).place(x=230, y=220)
 Button(window, width=4, text="⌫", fg="black", font=("Helvetica", 16), background='white', command=sil).place(x=230, y=160)
+
+# Klavye bağlamaları
 window.bind("<Return>", lambda event: hesapla())
-window.bind("<KP_Divide>", lambda event: islemler("/"),giris.delete(0, 'end'))  
-window.bind("<KP_Multiply>", lambda event: islemler("*")) 
-window.bind("<minus>", lambda event: islemler("-"))
-window.bind("<plus>", lambda event: islemler("+"))
+window.bind("<KP_Divide>", lambda event: islemler("/"))
+window.bind("<KP_Multiply>", lambda event: islemler("*"))
+window.bind("<KP_Subtract>", lambda event: islemler("-"))
+window.bind("<KP_Add>", lambda event: islemler("+"))
 window.bind("<percent>", lambda event: islemler("%"))
+window.bind("<KP_Enter>", lambda event: hesapla())
+window.bind("<Key>", lambda event: klavye_islemleri(event))
+
+def klavye_islemleri(event):
+    if event.char in '0123456789':
+        yaz(event.char)
+    elif event.char in '+-*/%':
+        islemler(event.char)
+    elif event.char == '\r':
+        hesapla()
+    elif event.char == '.':
+        yaz('.')
 
 window.mainloop()
