@@ -85,7 +85,7 @@ giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=("Helvetica", 16))
 giris.place(height=60, width=275, x=13, y=20)
 
 Button(window, width=4, text="x", fg="black", font=("Helvetica", 16), background='white', command=lambda: islemler("*")).place(x=160, y=100)
-Button(window, width=4, text="/", fg="black", font=("Helvetica", 16), background='white', command=lambda: islemler("/")).place(x=90, y=100)
+Button(window, width=4, text="÷", fg="black", font=("Helvetica", 16), background='white', command=lambda: islemler("/")).place(x=90, y=100)
 Button(window, width=4, text="C", fg="black", font=("Helvetica", 16), background='white', command=temizle).place(x=230, y=100)
 Button(window, width=4, text="%", fg="black", font=("Helvetica", 16), background='white', command=lambda: islemler("%")).place(x=20, y=100)
 Button(window, width=4, text="1", fg="black", font=("Helvetica", 16), background='white', command=lambda: yaz(1)).place(x=20, y=160)
@@ -111,13 +111,14 @@ window.bind("<KP_Multiply>", lambda event: islemler("*"))
 window.bind("<KP_Subtract>", lambda event: islemler("-"))
 window.bind("<KP_Add>", lambda event: islemler("+"))
 window.bind("<percent>", lambda event: islemler("%"))
+window.bind("<BackSpace>", lambda event: sil())
 window.bind("<KP_Enter>", lambda event: hesapla())
 window.bind("<Key>", lambda event: klavye_islemleri(event))
 
 def klavye_islemleri(event):
     if event.char in '0123456789':
         yaz(event.char)
-    elif event.char in '+-*/%':
+    elif event.char in '+-*/%':         
         islemler(event.char)
     elif event.char == '\r':
         hesapla()
