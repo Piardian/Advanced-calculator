@@ -75,11 +75,17 @@ def sil():
 def temizle():
     giris.delete(0, 'end')
 
+
 window = Tk()
 window.title('Hesap Makinası')
 window.geometry("300x400")
 window.configure(background='black')
 window.resizable(width=False, height=False)
+
+def ikinci_pencere():
+    ikinci_pencere= tk.Frame(window, bg="lightgray", bd=2,relief="sunken")
+    ikinci_pencere.place(x=1, y=1,width=100, height=140)
+    Button(ikinci_pencere, width=2, text="...", fg="black", font=("Helvetica", 9), background='white',command=ikinci_pencere.destroy).place(height=25,x=1, y=1)
 
 giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=("Helvetica", 16))
 giris.place(height=60, width=275, x=13, y=20)
@@ -87,6 +93,9 @@ giris.place(height=60, width=275, x=13, y=20)
 # Odağı ve tıklamayı engelleme
 giris.bind("<FocusIn>", lambda event: "break")
 giris.bind("<Button-1>", lambda event: "break")
+
+
+    
 
 Button(window, width=4, text="x", fg="black",bd=4, font=("Helvetica", 16), background='white', command=lambda: islemler("*")).place(x=155, y=100)
 Button(window, width=4, text="÷", fg="black",bd=4, font=("Helvetica", 16), background='white', command=lambda: islemler("/")).place(x=85, y=100)
@@ -107,6 +116,7 @@ Button(window, width=10,text="0", fg="black", bd=3, font=("Helvetica", 16), back
 Button(window, width=4, text="+", fg="black",bd=4, font=("Helvetica", 16), background='white', command=lambda: islemler("+")).place(x=225, y=280)
 Button(window, width=4, text="-", fg="black",bd=4, font=("Helvetica", 16), background='white', command=lambda: islemler("-")).place(x=225, y=220)
 Button(window, width=4, text="⌫", fg="black", bd=4,font=("Helvetica", 16), background='white', command=sil).place(x=225, y=160)
+Button(window, width=2, text="...", fg="black", font=("Helvetica", 9), background='white',command=ikinci_pencere).place(height=25,x=1, y=1)
 
 # Klavye bağlamaları
 window.bind("<Return>", lambda event: hesapla())
@@ -129,4 +139,4 @@ def klavye_islemleri(event):
     elif event.char == '.':
         yaz('.')
 
-window.mainloop()
+mainloop()
