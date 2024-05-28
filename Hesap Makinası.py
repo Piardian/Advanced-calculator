@@ -1,12 +1,18 @@
 import tkinter as tk
 from tkinter import *
+from tkinter import ttk
 
 # Küresel değişkenler
-hesap = ''
-s1 = 0
+hesap = []
+s1 = []
+yeni_islem = True
 yuzde = False
 
 def yaz(x):
+    global yeni_islem
+    if yeni_islem:
+        giris.delete(0, 'end')
+        yeni_islem = False
     s = len(giris.get())
     giris.insert(s, str(x))
 
@@ -14,19 +20,25 @@ def islemler(x):
     global hesap
     global s1
     global yuzde
+    global yeni_islem
+
+    if yeni_islem and x not in "+-*/%":
+        giris.delete(0, 'end')
+        yeni_islem = False
+
     if x in "+-*/":
-        hesap = x
         try:
-            s1 = float(giris.get())
+            s1.append(float(giris.get()))
         except ValueError:
             giris.delete(0, 'end')
             giris.insert(0, "Hata")
             return
+        hesap.append(x)
         giris.delete(0, 'end')
     elif x == "%":
         yuzde = True
         try:
-            s1 = float(giris.get())
+            s1.append(float(giris.get()))
         except ValueError:
             giris.delete(0, 'end')
             giris.insert(0, "Hata")
@@ -37,27 +49,36 @@ def islemler(x):
 
 def hesapla():
     global s1
+    global hesap
     global yuzde
+    global yeni_islem
+
     try:
         if yuzde:
             yuzde_degeri = float(giris.get())
-            sonuc = (yuzde_degeri / 100) * s1
+            s1[-1] = (yuzde_degeri / 100) * s1[-1]
             yuzde = False
         else:
-            s2 = float(giris.get())
-            if hesap == '+':
-                sonuc = s1 + s2
-            elif hesap == '-':
-                sonuc = s1 - s2
-            elif hesap == '/':
-                if s2 != 0:
-                    sonuc = s1 / s2
+            s1.append(float(giris.get()))
+
+        sonuc = s1[0]
+        for i in range(1, len(s1)):
+            if hesap[i-1] == '+':
+                sonuc += s1[i]
+            elif hesap[i-1] == '-':
+                sonuc -= s1[i]
+            elif hesap[i-1] == '/':
+                if s1[i] != 0:
+                    sonuc /= s1[i]
                 else:
                     giris.delete(0, 'end')
                     giris.insert(0, "Hata: Sıfıra bölme")
+                    hesap = []
+                    s1 = []
+                    yeni_islem = True
                     return
-            elif hesap == '*':
-                sonuc = s1 * s2
+            elif hesap[i-1] == '*':
+                sonuc *= s1[i]
 
         sonuc_str = str(sonuc)
         if sonuc % 1 == 0:
@@ -65,16 +86,27 @@ def hesapla():
 
         giris.delete(0, 'end')
         giris.insert(0, sonuc_str)
+        hesap = []
+        s1 = []
+        yeni_islem = True  # Yeni işlem başladığını belirt
     except ValueError:
         giris.delete(0, 'end')
         giris.insert(0, "Hata")
+        hesap = []
+        s1 = []
+        yeni_islem = True  # Yeni işlem başladığını belirt
 
 def sil():
     giris.delete(len(giris.get()) - 1)
 
 def temizle():
+    global hesap
+    global s1
+    global yeni_islem
     giris.delete(0, 'end')
-
+    hesap = []
+    s1 = []
+    yeni_islem = True
 
 window = Tk()
 window.title('Hesap Makinası')
@@ -83,19 +115,19 @@ window.configure(background='black')
 window.resizable(width=False, height=False)
 
 def ikinci_pencere():
-    ikinci_pencere= tk.Frame(window, bg="lightgray", bd=2,relief="sunken")
+    ikinci_pencere= tk.Frame(window, bg="lightgray", bd=2,relief="ridge")
     ikinci_pencere.place(x=1, y=1,width=100, height=140)
-    Button(ikinci_pencere, width=2, text="...", fg="black", font=("Helvetica", 9), background='white',command=ikinci_pencere.destroy).place(height=25,x=1, y=1)
+    Button(ikinci_pencere, width=2, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere.destroy).place(height=25,x=1, y=1)
 
 giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=("Helvetica", 16))
 giris.place(height=60, width=275, x=13, y=20)
 
+
 # Odağı ve tıklamayı engelleme
+window.bind("<Tab>", lambda event: "break")
 giris.bind("<FocusIn>", lambda event: "break")
 giris.bind("<Button-1>", lambda event: "break")
 
-
-    
 
 Button(window, width=4, text="x", fg="black",bd=4, font=("Helvetica", 16), background='white', command=lambda: islemler("*")).place(x=155, y=100)
 Button(window, width=4, text="÷", fg="black",bd=4, font=("Helvetica", 16), background='white', command=lambda: islemler("/")).place(x=85, y=100)
