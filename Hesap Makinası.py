@@ -114,6 +114,7 @@ window.geometry("300x400")
 window.configure(background='black')
 window.resizable(width=False, height=False)
 
+
 def ikinci_pencere():
     ikinci_pencere= tk.Frame(window, bg="lightgray", bd=2,relief="ridge")
     ikinci_pencere.place(x=1, y=1,width=100, height=140)
@@ -136,6 +137,11 @@ secim_var = tk.StringVar()
 
 # Seçenekler listesi
 
+def Octune(event):
+    
+    if event.char == 'O' or event.char == 'o':
+        giris.insert(tk.END,"Ez"("red"))
+        
 
 
 style = ttk.Style()
@@ -172,6 +178,8 @@ window.bind("<percent>", lambda event: islemler("%"))
 window.bind("<BackSpace>", lambda event: sil())
 window.bind("<KP_Enter>", lambda event: hesapla())
 window.bind("<Key>", lambda event: klavye_islemleri(event))
+window.bind("<O>", lambda event: Octune(event))
+ 
 
 def klavye_islemleri(event):
     if event.char in '0123456789':
@@ -182,5 +190,10 @@ def klavye_islemleri(event):
         hesapla()
     elif event.char == '.':
         yaz('.')
+    elif event.char == 'o':
+        Octune(event)
+        
 
-mainloop()
+
+
+window.mainloop()
