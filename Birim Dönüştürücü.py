@@ -127,7 +127,7 @@ secim_var = tk.StringVar()
 
 # Seçenekler listesi
 secenekler = ["Kilometre","Hektometre","Dekametre","Metre","Desimetre",
-"antimetre","Milimetre","Mikrometre","Nanometre","Pikometre","Femtometre","Attometre"]
+"antimetre","Milimetre","Mikrometre","Nanometre","Pikometre","Femtometre","Attometre","Işık Yılı"]
 
 # Combobox (Seçim baloncuğu) oluştur
 
