@@ -140,7 +140,7 @@ secim_var = tk.StringVar()
 def Octune(event):
     
     if event.char == 'O' or event.char == 'o':
-        giris.insert(tk.END,"Ez"("red"))
+        giris.insert(tk.END,"Ez")
         
 
 
