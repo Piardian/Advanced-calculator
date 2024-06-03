@@ -147,26 +147,33 @@ def Octune(event):
 style = ttk.Style()
 style.configure('TButton', font=('Helvetica', 16))
 
-ttk.Button(window, width=4, text="x",  command=lambda: islemler("*")).place(height=44,x=155, y=100)
-ttk.Button(window, width=4, text="÷",  command=lambda: islemler("/")).place(height=44,x=85, y=100)
-ttk.Button(window, width=4, text="C",  command=temizle)              .place(height=44,x=225, y=100)
-ttk.Button(window, width=4, text="%",  command=lambda: islemler("%")).place(height=44,x=15, y=100)
-ttk.Button(window, width=4, text="1",  command=lambda: yaz(1)).place(height=44,x=15, y=160)
-ttk.Button(window, width=4, text="2",  command=lambda: yaz(2)).place(height=44,x=85, y=160)
-ttk.Button(window, width=4, text="3",  command=lambda: yaz(3)).place(height=44,x=155, y=160)
-ttk.Button(window, width=4, text="4",  command=lambda: yaz(4)).place(height=44,x=15, y=220)
-ttk.Button(window, width=4, text="5",  command=lambda: yaz(5)).place(height=44,x=85, y=220)
-ttk.Button(window, width=4, text="6",  command=lambda: yaz(6)).place(height=44,x=155, y=220)
-ttk.Button(window, width=4, text="7",  command=lambda: yaz(7)).place(height=44,x=15, y=280)
-ttk.Button(window, width=4, text="8",  command=lambda: yaz(8)).place(height=44,x=85, y=280)
-ttk.Button(window, width=4, text="9",  command=lambda: yaz(9)).place(height=44,x=155, y=280)
-ttk.Button(window, width=4, text=".",  command=lambda: yaz(".")).place(height=44,x=155, y=340)
-ttk.Button(window, width=4, text="=",  command=hesapla).place(height=44,x=225, y=340)
-ttk.Button(window, width=10,text="0",  command=lambda: yaz(0)).place(height=44, x=15, y=340)
-ttk.Button(window, width=4, text="+",  command=lambda: islemler("+")).place(height=44,x=225, y=280)
-ttk.Button(window, width=4, text="-",  command=lambda: islemler("-")).place(height=44,x=225, y=220)
-ttk.Button(window, width=4, text="⌫", command=sil).place(height=44,x=225, y=160)
- #ttk.Button(window, width=1, text="...",command=ikinci_pencere).place(height=10,x=1, y=1)
+buttons = [
+    {"text": "x", "command": lambda: islemler("*"), "pos": (155, 100)},
+    {"text": "÷", "command": lambda: islemler("/"), "pos": (85, 100)},
+    {"text": "C", "command": temizle, "pos": (225, 100)},
+    {"text": "%", "command": lambda: islemler("%"), "pos": (15, 100)},
+    {"text": "1", "command": lambda: yaz(1), "pos": (15, 160)},
+    {"text": "2", "command": lambda: yaz(2), "pos": (85, 160)},
+    {"text": "3", "command": lambda: yaz(3), "pos": (155, 160)},
+    {"text": "4", "command": lambda: yaz(4), "pos": (15, 220)},
+    {"text": "5", "command": lambda: yaz(5), "pos": (85, 220)},
+    {"text": "6", "command": lambda: yaz(6), "pos": (155, 220)},
+    {"text": "7", "command": lambda: yaz(7), "pos": (15, 280)},
+    {"text": "8", "command": lambda: yaz(8), "pos": (85, 280)},
+    {"text": "9", "command": lambda: yaz(9), "pos": (155, 280)},
+    {"text": ".", "command": lambda: yaz("."), "pos": (155, 340)},
+    {"text": "=", "command": hesapla, "pos": (225, 340)},
+    {"text": "0", "command": lambda: yaz(0), "pos": (15, 340), "width": 10},
+    {"text": "+", "command": lambda: islemler("+"), "pos": (225, 280)},
+    {"text": "-", "command": lambda: islemler("-"), "pos": (225, 220)},
+    {"text": "⌫", "command": sil, "pos": (225, 160)}
+]
+
+# Create buttons
+for button in buttons:
+    width = button.get("width", 4)
+    ttk.Button(window, width=width, text=button["text"], command=button["command"]).place(height=44, x=button["pos"][0], y=button["pos"][1])
+
 
 # Klavye bağlamaları
 window.bind("<Return>", lambda event: hesapla())
