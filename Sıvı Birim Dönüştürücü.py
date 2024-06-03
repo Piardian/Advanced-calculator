@@ -101,7 +101,7 @@ def birim_donustur():
 
 # Pencere ayarları
 window = tk.Tk()
-window.title('Birim Dönüştürücü')
+window.title('Sıvı Birim Dönüştürücü')
 window.geometry("293x460")
 window.configure(background='black')
 window.resizable(width=False, height=False)
