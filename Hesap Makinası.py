@@ -148,10 +148,7 @@ style = ttk.Style()
 style.configure('TButton', font=('Helvetica', 16))
 
 buttons = [
-    {"text": "x", "command": lambda: islemler("*"), "pos": (155, 100)},
-    {"text": "÷", "command": lambda: islemler("/"), "pos": (85, 100)},
-    {"text": "C", "command": temizle, "pos": (225, 100)},
-    {"text": "%", "command": lambda: islemler("%"), "pos": (15, 100)},
+  
     {"text": "1", "command": lambda: yaz(1), "pos": (15, 160)},
     {"text": "2", "command": lambda: yaz(2), "pos": (85, 160)},
     {"text": "3", "command": lambda: yaz(3), "pos": (155, 160)},
@@ -162,11 +159,15 @@ buttons = [
     {"text": "8", "command": lambda: yaz(8), "pos": (85, 280)},
     {"text": "9", "command": lambda: yaz(9), "pos": (155, 280)},
     {"text": ".", "command": lambda: yaz("."), "pos": (155, 340)},
-    {"text": "=", "command": hesapla, "pos": (225, 340)},
     {"text": "0", "command": lambda: yaz(0), "pos": (15, 340), "width": 10},
+    {"text": "x", "command": lambda: islemler("*"), "pos": (155, 100)},
+    {"text": "÷", "command": lambda: islemler("/"), "pos": (85, 100)},
+    {"text": "%", "command": lambda: islemler("%"), "pos": (15, 100)},
     {"text": "+", "command": lambda: islemler("+"), "pos": (225, 280)},
     {"text": "-", "command": lambda: islemler("-"), "pos": (225, 220)},
-    {"text": "⌫", "command": sil, "pos": (225, 160)}
+    {"text": "=", "command": hesapla, "pos": (225, 340)},
+    {"text": "C", "command": temizle, "pos": (225, 100)},
+    {"text": "⌫", "command": sil, "pos": (225, 160)},
 ]
 
 # Create buttons
