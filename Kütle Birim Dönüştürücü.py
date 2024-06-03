@@ -74,7 +74,7 @@ def birim_donustur():
         # Metreden hedef birime çevir
         if birim2 == "Ton":
             sonuc = deger_metre / 1000
-        elif birim2 == "Hektgram":
+        elif birim2 == "Hektogram":
             sonuc = deger_metre / 100
         elif birim2 == "Dekagram":
             sonuc = deger_metre / 10
@@ -86,19 +86,6 @@ def birim_donustur():
             sonuc = deger_metre / 0.01
         elif birim2 == "Miligram":
             sonuc = deger_metre / 0.001
-       
-        # elif birim2 == "Mikrometre":
-        #     sonuc = deger_metre / 1e-6
-        # elif birim2 == "Nanometre":
-        #     sonuc = deger_metre / 1e-9
-        # elif birim2 == "Pikometre":
-        #     sonuc = deger_metre / 1e-12
-        # elif birim2 == "Femtometre":
-        #     sonuc = deger_metre / 1e-15
-        # elif birim2 == "Attometre":
-        #     sonuc = deger_metre / 1e-18
-        # elif birim2 == "Işık Yılı":
-        #     sonuc = deger_metre / 9.461e+15
         else:
             sonuc = "Geçersiz birim"
         
@@ -132,7 +119,7 @@ secim_var1 = tk.StringVar()
 secim_var2 = tk.StringVar()
 
 # Seçenekler listesi
-secenekler = ["Miligram","Santigram","Desigram","Kilogram","Dekagram","Hektgram","Ton"]
+secenekler = ["Miligram","Santigram","Desigram","Kilogram","Dekagram","Hektogram","Ton"]
 
 #"Işık Yılı","Mikrometre","Nanometre","Pikometre","Femtometre","Attometre","Işık Yılı"
 
