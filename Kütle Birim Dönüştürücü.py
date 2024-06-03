@@ -53,18 +53,18 @@ def birim_donustur():
             deger_metre = deger * 0.01
         elif birim1 == "Miligram":
             deger_metre = deger * 0.001
-        elif birim1 == "Mikrometre":
-            deger_metre = deger * 1e-6
-        elif birim1 == "Nanometre":
-            deger_metre = deger * 1e-9
-        elif birim1 == "Pikometre":
-            deger_metre = deger * 1e-12
-        elif birim1 == "Femtometre":
-            deger_metre = deger * 1e-15
-        elif birim1 == "Attometre":
-            deger_metre = deger * 1e-18
-        elif birim1 == "Işık Yılı":
-            deger_metre = deger * 9.461e+15
+        # elif birim1 == "Mikrometre":
+        #     deger_metre = deger * 1e-6
+        # elif birim1 == "Nanometre":
+        #     deger_metre = deger * 1e-9
+        # elif birim1 == "Pikometre":
+        #     deger_metre = deger * 1e-12
+        # elif birim1 == "Femtometre":
+        #     deger_metre = deger * 1e-15
+        # elif birim1 == "Attometre":
+        #     deger_metre = deger * 1e-18
+        # elif birim1 == "Işık Yılı":
+        #     deger_metre = deger * 9.461e+15
         else:
             sonuc = "Geçersiz birim"
             sonuc_giris.delete(0, 'end')
@@ -86,18 +86,19 @@ def birim_donustur():
             sonuc = deger_metre / 0.01
         elif birim2 == "Miligram":
             sonuc = deger_metre / 0.001
-        elif birim2 == "Mikrometre":
-            sonuc = deger_metre / 1e-6
-        elif birim2 == "Nanometre":
-            sonuc = deger_metre / 1e-9
-        elif birim2 == "Pikometre":
-            sonuc = deger_metre / 1e-12
-        elif birim2 == "Femtometre":
-            sonuc = deger_metre / 1e-15
-        elif birim2 == "Attometre":
-            sonuc = deger_metre / 1e-18
-        elif birim2 == "Işık Yılı":
-            sonuc = deger_metre / 9.461e+15
+       
+        # elif birim2 == "Mikrometre":
+        #     sonuc = deger_metre / 1e-6
+        # elif birim2 == "Nanometre":
+        #     sonuc = deger_metre / 1e-9
+        # elif birim2 == "Pikometre":
+        #     sonuc = deger_metre / 1e-12
+        # elif birim2 == "Femtometre":
+        #     sonuc = deger_metre / 1e-15
+        # elif birim2 == "Attometre":
+        #     sonuc = deger_metre / 1e-18
+        # elif birim2 == "Işık Yılı":
+        #     sonuc = deger_metre / 9.461e+15
         else:
             sonuc = "Geçersiz birim"
         
