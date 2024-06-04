@@ -116,9 +116,11 @@ window.resizable(width=False, height=False)
 
 
 def ikinci_pencere():
-    ikinci_pencere= tk.Frame(window, bg="lightgray", bd=2,relief="ridge")
-    ikinci_pencere.place(x=1, y=1,width=100, height=140)
-    Button(ikinci_pencere, width=2, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere.destroy).place(height=25,x=1, y=1)
+    ikinci_pencere= tk.Frame(window, bg="black" ,bd=2,relief="ridge")
+    ikinci_pencere.place(x=1, y=1,width=80, height=100)
+    Label=tk.Label(ikinci_pencere, text="Pia",fg="red",bg="black",font=("Times", 24))
+    Label.place(x=15, y=35,width=40, height=30)
+    Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere.destroy).place(height=15,x=1, y=1)
 
 giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=("Helvetica", 16))
 giris.place(height=60, width=275, x=13, y=20)
@@ -174,7 +176,7 @@ buttons = [
 for button in buttons:
     width = button.get("width", 4)
     ttk.Button(window, width=width, text=button["text"], command=button["command"]).place(height=44, x=button["pos"][0], y=button["pos"][1])
-
+Button(window, width=1, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere).place(height=15,x=1, y=1)
 
 # Klavye bağlamaları
 window.bind("<Return>", lambda event: hesapla())

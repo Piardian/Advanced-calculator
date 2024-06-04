@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-
+from tkinter import *
 # Global değişkenler
 yeni_islem = True
 hesap = []
@@ -117,6 +117,13 @@ window.geometry("293x460")
 window.configure(background='black')
 window.resizable(width=False, height=False)
 
+def ikinci_pencere():
+    ikinci_pencere= tk.Frame(window, bg="black" ,bd=2,relief="ridge")
+    ikinci_pencere.place(x=1, y=1,width=80, height=100)
+    Label=tk.Label(ikinci_pencere, text="Pia",fg="red",bg="black",font=("Times", 24))
+    Label.place(x=15, y=35,width=40, height=30)
+    Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere.destroy).place(height=15,x=1, y=1)
+
 # Giriş alanı
 giris = ttk.Entry(window, width=29, justify=tk.RIGHT, font=("Helvetica", 16))
 giris.place(height=60, width=265, x=15, y=22)
@@ -185,6 +192,8 @@ for button in buttons:
         command=button["command"], 
         width=button.get("width", 6)
     ).place(height=44, x=button["x"], y=button["y"])
+
+Button(window, width=1, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere).place(height=15,x=1, y=1)
 
 window.bind("<Return>", lambda event: birim_donustur())
 window.bind("<BackSpace>", lambda event: sil())
