@@ -122,7 +122,7 @@ def ikinci_pencere():
     Label.place(x=15, y=35,width=40, height=30)
     Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere.destroy).place(height=15,x=1, y=1)
 
-giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=("Helvetica", 16))
+giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=('Times', 19))
 giris.place(height=60, width=275, x=13, y=20)
 
 

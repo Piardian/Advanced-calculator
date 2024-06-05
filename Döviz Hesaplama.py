@@ -100,7 +100,7 @@ def secim_degisti(event):
 
 # Pencere ayarları
 window = tk.Tk()
-window.title('Para Birim Dönüştürücü')
+window.title('Döviz Hesaplama')
 window.geometry("293x460")
 window.configure(background='black')
 window.resizable(width=False, height=False)
