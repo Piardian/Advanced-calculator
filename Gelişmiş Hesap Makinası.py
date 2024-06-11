@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import math
 
 # Küresel değişkenler
 hesap = []
@@ -22,13 +23,13 @@ def islemler(x):
     global yuzde
     global yeni_islem
 
-    if yeni_islem and x not in "+-*/%":
+    if yeni_islem and x not in "+-*/%()":
         giris.delete(0, 'end')
         yeni_islem = False
 
     if x in "+-*/":
         try:
-            s1.append(float(giris.get()))
+            s1.append(giris.get())
         except ValueError:
             giris.delete(0, 'end')
             giris.insert(0, "Hata")
@@ -38,12 +39,99 @@ def islemler(x):
     elif x == "%":
         yuzde = True
         try:
-            s1.append(float(giris.get()))
+            s1.append(giris.get())
         except ValueError:
             giris.delete(0, 'end')
             giris.insert(0, "Hata")
             return
         giris.delete(0, 'end')
+    elif x == "x²":
+        try:
+            s1.append(f"({giris.get()})**2")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "x³":
+        try:
+            s1.append(f"({giris.get()})**3")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "√":
+        try:
+            s1.append(f"math.sqrt({giris.get()})")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "sin":
+        try:
+            s1.append(f"math.sin(math.radians({giris.get()}))")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "cos":
+        try:
+            s1.append(f"math.cos(math.radians({giris.get()}))")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "tan":
+        try:
+            s1.append(f"math.tan(math.radians({giris.get()}))")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "cot":
+        try:
+            s1.append(f"1/math.tan(math.radians({giris.get()}))")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "π":
+        yaz(math.pi)
+    elif x == "e":
+        yaz(math.e)
+    elif x == "log":
+        try:
+            s1.append(f"math.log10({giris.get()})")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x == "x!":
+        try:
+            s1.append(f"math.factorial({giris.get()})")
+        except ValueError:
+            giris.delete(0, 'end')
+            giris.insert(0, "Hata")
+            return
+        hesap.append("")
+        hesapla()
+    elif x in "()":
+        yaz(x)
     else:
         giris.insert(END, x)
 
@@ -56,30 +144,17 @@ def hesapla():
     try:
         if yuzde:
             yuzde_degeri = float(giris.get())
-            s1[-1] = (yuzde_degeri / 100) * s1[-1]
+            s1[-1] = f"({s1[-1]}*{yuzde_degeri}/100)"
             yuzde = False
         else:
-            s1.append(float(giris.get()))
+            if len(hesap) == 0 or hesap[-1] != "":
+                s1.append(giris.get())
 
-        sonuc = s1[0]
-        for i in range(1, len(s1)):
-            if hesap[i-1] == '+':
-                sonuc += s1[i]
-            elif hesap[i-1] == '-':
-                sonuc -= s1[i]
-            elif hesap[i-1] == '/':
-                if s1[i] != 0:
-                    sonuc /= s1[i]
-                else:
-                    giris.delete(0, 'end')
-                    giris.insert(0, "Hata: Sıfıra bölme")
-                    hesap = []
-                    s1 = []
-                    yeni_islem = True
-                    return
-            elif hesap[i-1] == '*':
-                sonuc *= s1[i]
+        hesap_str = "".join([f"{s1[i]}{hesap[i]}" for i in range(len(hesap))])
+        if len(s1) > len(hesap):
+            hesap_str += s1[-1]
 
+        sonuc = eval(hesap_str)
         sonuc_str = str(sonuc)
         if sonuc % 1 == 0:
             sonuc_str = str(int(sonuc))
@@ -89,7 +164,7 @@ def hesapla():
         hesap = []
         s1 = []
         yeni_islem = True  # Yeni işlem başladığını belirt
-    except ValueError:
+    except (ValueError, SyntaxError):
         giris.delete(0, 'end')
         giris.insert(0, "Hata")
         hesap = []
@@ -114,7 +189,6 @@ window.geometry("510x400")
 window.configure(background='black')
 window.resizable(width=False, height=False)
 
-
 def ikinci_pencere():
     ikinci_pencere= tk.Frame(window, bg="black" ,bd=2,relief="ridge")
     ikinci_pencere.place(x=1, y=1,width=80, height=100)
@@ -124,7 +198,6 @@ def ikinci_pencere():
 
 giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=('Times', 19))
 giris.place(height=60, width=483, x=13, y=20)
-
 
 # Odağı ve tıklamayı engelleme
 window.bind("<Tab>", lambda event: "break")
@@ -137,35 +210,27 @@ def secim_degisti(event):
 
 secim_var = tk.StringVar()
 
-# Seçenekler listesi
-
-def Octune(event):
-    
-    if event.char == 'O' or event.char == 'o':
-        giris.insert(tk.END,"Ez")
-        
-
-
 style = ttk.Style()
 style.configure('TButton',background='black', foreground='black',font=('Times', 19))
 style.map('TButton',
           background=[('active', 'green')])
+
 buttons = [
-    {"text": "x", "command": lambda: yaz("x"), "pos": (15, 340)},
-    {"text": "sin", "command": lambda: yaz("sin"), "pos": (15, 100)},
-    {"text": "cos", "command": lambda: yaz("cos"), "pos": (15, 160)},
-    {"text": "tan", "command": lambda: yaz("tan"), "pos": (15, 220)},
-    {"text": "cot", "command": lambda: yaz("cot"), "pos": (15, 280)},
-    {"text": "(", "command": lambda: yaz("("), "pos": (85, 340)},
-    {"text": "π", "command": lambda: yaz("π"), "pos": (85, 100)},
+    {"text": "i", "command": lambda: yaz("i"), "pos": (15, 340)},
+    {"text": "sin", "command": lambda: islemler("sin"), "pos": (15, 100)},
+    {"text": "cos", "command": lambda: islemler("cos"), "pos": (15, 160)},
+    {"text": "tan", "command": lambda: islemler("tan"), "pos": (15, 220)},
+    {"text": "cot", "command": lambda: islemler("cot"), "pos": (15, 280)},
+    {"text": "(", "command": lambda: islemler("("), "pos": (85, 340)},
+    {"text": "π", "command": lambda: islemler("π"), "pos": (85, 100)},
     {"text": "x", "command": lambda: yaz("x"), "pos": (85, 160)},
-    {"text": "√ ", "command": lambda: yaz("√"), "pos": (85, 220)},
-    {"text": "log", "command": lambda: yaz("log"), "pos": (85, 280)},
-    {"text": ")", "command": lambda: yaz(")"), "pos": (155, 340)},
-    {"text": "e", "command": lambda: yaz("e"), "pos": (155, 100)},
-    {"text": "x³", "command": lambda: yaz("x³"), "pos": (155, 160)},
-    {"text": "x²", "command": lambda: yaz("x²"), "pos": (155, 220)},
-    {"text": "x!", "command": lambda: yaz("x"), "pos": (155, 280)},
+    {"text": "√", "command": lambda: islemler("√"), "pos": (85, 220)},
+    {"text": "log", "command": lambda: islemler("log"), "pos": (85, 280)},
+    {"text": ")", "command": lambda: islemler(")"), "pos": (155, 340)},
+    {"text": "e", "command": lambda: islemler("e"), "pos": (155, 100)},
+    {"text": "x³", "command": lambda: islemler("x³"), "pos": (155, 160)},
+    {"text": "x²", "command": lambda: islemler("x²"), "pos": (155, 220)},
+    {"text": "x!", "command": lambda: islemler("x!"), "pos": (155, 280)},
     {"text": "1", "command": lambda: yaz(1), "pos": (225, 160)},
     {"text": "2", "command": lambda: yaz(2), "pos": (295, 160)},
     {"text": "3", "command": lambda: yaz(3), "pos": (365, 160)},
@@ -204,22 +269,15 @@ window.bind("<percent>", lambda event: islemler("%"))
 window.bind("<BackSpace>", lambda event: sil())
 window.bind("<KP_Enter>", lambda event: hesapla())
 window.bind("<Key>", lambda event: klavye_islemleri(event))
-window.bind("<O>", lambda event: Octune(event))
- 
 
 def klavye_islemleri(event):
     if event.char in '0123456789':
         yaz(event.char)
-    elif event.char in '+-*/%':         
+    elif event.char in '+-*/%()':
         islemler(event.char)
     elif event.char == '\r':
         hesapla()
     elif event.char == '.':
         yaz('.')
-    elif event.char == 'o':
-        Octune(event)
-        
-
-
 
 window.mainloop()
