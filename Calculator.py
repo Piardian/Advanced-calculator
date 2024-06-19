@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 import requests
+import math
 # Küresel değişkenler
 hesap = []
 s1 = []
@@ -64,7 +65,7 @@ class Screen1:
             ttk.Button(self.master, width=width, text=button["text"], command=button["command"]).place(height=44, x=button["pos"][0], y=button["pos"][1])
 
         Button(self.master, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=self.ikinci_pencere).place(height=15, x=1, y=1)
-
+        
 
     def yaz(self, x):
         global yeni_islem
@@ -165,6 +166,10 @@ class Screen1:
         hesap = []
         s1 = []
         yeni_islem = True
+    
+    def goto_advanced(self):
+        self.master.withdraw()
+        AdvancedCalculator(tk.Toplevel(self.master))
 
     def goto_screen2(self):
         self.master.withdraw()
@@ -185,35 +190,37 @@ class Screen1:
     def goto_screen6(self):
         self.master.withdraw()
         screen6 = Screen6(tk.Toplevel(self.master))   
-
-    def ikinci_pencere(self):
-        ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=200)
-        label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
-        label.place(x=60, y=25, width=30, height=25)
-        label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
-        label.place(x=60, y=55, width=30, height=25)
-        label = tk.Label(ikinci_pencere, text="⚖️", fg="gray", bg="black", font=("Roboto", 15))
-        label.place(x=60, y=85, width=30, height=25)
-        label = tk.Label(ikinci_pencere, text="💱", fg="lightgreen", bg="black", font=("Roboto", 15))
-        label.place(x=60, y=115, width=30, height=25)
-        label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
-        label.place(x=60, y=145, width=30, height=25)
-        
     
-        destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 7), background='white', command=ikinci_pencere.destroy)
-        destroy_button.place(height=15, x=0, y=0)
-        scr1_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Roboto", 11), background='white', text="Length", command=self.goto_screen2)
-        scr1_button.place(height=20, x=0, y=30)
-        scr2_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Futura", 11), background='white', text="Liquid ", command=self.goto_screen3)
-        scr2_button.place(height=20, x=0, y=60)
-        scr3_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Lato", 11), background='white', text="Mass", command=self.goto_screen4)
-        scr3_button.place(height=20, x=0, y=90)
-        scr4_button = tk.Button(ikinci_pencere, width=8, fg="black", font=("Open Sans", 8), background='white', text="Exchange", command=self.goto_screen5)
-        scr4_button.place(height=20, x=0, y=120)  
-        scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Montserrat", 11), background='white', text="Cyrpto", command=self.goto_screen6)
-        scr5_button.place(height=20, x=0, y=150)
-        
+    def ikinci_pencere(self):
+     ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
+     ikinci_pencere.place(x=1, y=1, width=100, height=230)
+     label = tk.Label(ikinci_pencere, text="√", fg="gray", bg="black", font=("Roboto", 15))
+     label.place(x=60, y=25, width=30, height=25)  
+     label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
+     label.place(x=60, y=55, width=30, height=25)  
+     label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
+     label.place(x=60, y=85, width=30, height=25)  
+     label = tk.Label(ikinci_pencere, text="⚖️", fg="gray", bg="black", font=("Roboto", 15))
+     label.place(x=60, y=115, width=30, height=25)  
+     label = tk.Label(ikinci_pencere, text="💱", fg="lightgreen", bg="black", font=("Roboto", 15))
+     label.place(x=60, y=145, width=30, height=25)  
+     label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
+     label.place(x=60, y=175, width=30, height=25)  
+    
+     destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 7), background='white', command=ikinci_pencere.destroy)
+     destroy_button.place(height=15, x=0, y=0)
+     scr1_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Roboto", 11), background='white', text="Length", command=self.goto_screen2)
+     scr1_button.place(height=20, x=0, y=60)  
+     scr2_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Futura", 11), background='white', text="Liquid ", command=self.goto_screen3)
+     scr2_button.place(height=20, x=0, y=90)  
+     scr3_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Lato", 11), background='white', text="Mass", command=self.goto_screen4)
+     scr3_button.place(height=20, x=0, y=120)  
+     scr4_button = tk.Button(ikinci_pencere, width=7, fg="black", font=("Helvetica", 9), background='white', text="Exchange", command=self.goto_screen5)
+     scr4_button.place(height=20, x=0, y=150) 
+     scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Montserrat", 11), background='white', text="Cyrpto", command=self.goto_screen6)
+     scr5_button.place(height=20, x=0, y=180)  
+     scr6_button = tk.Button(ikinci_pencere, width=7, fg="black", font=("Helvetica", 9), background='white', text="Advanced", command=self.goto_advanced)
+     scr6_button.place(height=20, x=0, y=30)  
   
     def Octune(self, event):
         if event.char == 'O' or event.char == 'o':
@@ -230,6 +237,308 @@ class Screen1:
             self.yaz('.')
         elif event.char == 'o':
             self.Octune(event)
+
+class AdvancedCalculator:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Calculator (Advanced)")
+        self.master.geometry("510x400")
+        self.master.configure(background='black')
+        self.master.resizable(width=False, height=False)
+        
+        global yeni_islem
+        global hesap
+        global s1
+        global yuzde
+
+        hesap = []
+        s1 = []
+        yeni_islem = True
+        yuzde = False
+
+        self.giris = tk.Entry(self.master, width=29, bd=4, justify=RIGHT, font=('Times', 19))
+        self.giris.place(height=60, width=483, x=13, y=20)
+
+        self.master.bind("<Tab>", lambda event: "break")
+        self.giris.bind("<FocusIn>", lambda event: "break")
+        self.giris.bind("<Button-1>", lambda event: "break")
+
+        self.master.bind("<Return>", lambda event: self.hesapla())
+        self.master.bind("<KP_Divide>", lambda event: self.islemler("/"))
+        self.master.bind("<KP_Multiply>", lambda event: self.islemler("*"))
+        self.master.bind("<KP_Subtract>", lambda event: self.islemler("-"))
+        self.master.bind("<KP_Add>", lambda event: self.islemler("+"))
+        self.master.bind("<percent>", lambda event: self.islemler("%"))
+        self.master.bind("<BackSpace>", lambda event: self.sil())
+        self.master.bind("<KP_Enter>", lambda event: self.hesapla())
+        self.master.bind("<Key>", lambda event: self.klavye_islemleri(event))
+        self.master.bind("<O>", lambda event: self.Octune(event))
+
+        buttons = [
+            {"text": "i", "command": lambda: self.yaz("i"), "pos": (15, 340)},
+            {"text": "sin", "command": lambda: self.islemler("sin"), "pos": (15, 100)},
+            {"text": "cos", "command": lambda: self.islemler("cos"), "pos": (15, 160)},
+            {"text": "tan", "command": lambda: self.islemler("tan"), "pos": (15, 220)},
+            {"text": "cot", "command": lambda: self.islemler("cot"), "pos": (15, 280)},
+            {"text": "(", "command": lambda: self.islemler("("), "pos": (85, 340)},
+            {"text": "π", "command": lambda: self.islemler("π"), "pos": (85, 100)},
+            {"text": "x", "command": lambda: self.yaz("x"), "pos": (85, 160)},
+            {"text": "√", "command": lambda: self.islemler("√"), "pos": (85, 220)},
+            {"text": "log", "command": lambda: self.islemler("log"), "pos": (85, 280)},
+            {"text": ")", "command": lambda: self.islemler(")"), "pos": (155, 340)},
+            {"text": "e", "command": lambda: self.islemler("e"), "pos": (155, 100)},
+            {"text": "x³", "command": lambda: self.islemler("x³"), "pos": (155, 160)},
+            {"text": "x²", "command": lambda: self.islemler("x²"), "pos": (155, 220)},
+            {"text": "x!", "command": lambda: self.islemler("x!"), "pos": (155, 280)},
+            {"text": "1", "command": lambda: self.yaz(1), "pos": (225, 160)},
+            {"text": "2", "command": lambda: self.yaz(2), "pos": (295, 160)},
+            {"text": "3", "command": lambda: self.yaz(3), "pos": (365, 160)},
+            {"text": "4", "command": lambda: self.yaz(4), "pos": (225, 220)},
+            {"text": "5", "command": lambda: self.yaz(5), "pos": (295, 220)},
+            {"text": "6", "command": lambda: self.yaz(6), "pos": (365, 220)},
+            {"text": "7", "command": lambda: self.yaz(7), "pos": (225, 280)},
+            {"text": "8", "command": lambda: self.yaz(8), "pos": (295, 280)},
+            {"text": "9", "command": lambda: self.yaz(9), "pos": (365, 280)},
+            {"text": ".", "command": lambda: self.yaz("."), "pos": (365, 340)},
+            {"text": "0", "command": lambda: self.yaz(0), "pos": (225, 340), "width": 10},
+            {"text": "x", "command": lambda: self.islemler("*"), "pos": (365, 100)},
+            {"text": "÷", "command": lambda: self.islemler("/"), "pos": (295, 100)},
+            {"text": "%", "command": lambda: self.islemler("%"), "pos": (225, 100)},
+            {"text": "+", "command": lambda: self.islemler("+"), "pos": (435, 280)},
+            {"text": "-", "command": lambda: self.islemler("-"), "pos": (435, 220)},
+            {"text": "=", "command": self.hesapla, "pos": (435, 340)},
+            {"text": "C", "command": self.temizle, "pos": (435, 100)},
+            {"text": "⌫", "command": self.sil, "pos": (435, 160)},
+        ]
+
+        style = ttk.Style()
+        style.configure('TButton', font=('Helvetica', 16))
+
+        for button in buttons:
+            width = button.get("width", 4)
+            ttk.Button(self.master, width=width, text=button["text"], command=button["command"]).place(height=44, x=button["pos"][0], y=button["pos"][1])
+            self.ikinci_pencere_button = tk.Button(master, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=self.ikinci_pencere)
+            self.ikinci_pencere_button.place(height=15, x=1, y=1)
+
+        
+
+    def yaz(self, x):
+        global yeni_islem
+        if yeni_islem:
+            self.giris.delete(0, 'end')
+            yeni_islem = False
+        s = len(self.giris.get())
+        self.giris.insert(s, str(x))
+
+    def islemler(self, x):
+        global hesap
+        global s1
+        global yuzde
+        global yeni_islem
+
+        if yeni_islem and x not in "+-*/%()":
+            self.giris.delete(0, 'end')
+            yeni_islem = False
+
+        if x in "+-*/":
+            try:
+                s1.append(self.giris.get())
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append(x)
+            self.giris.delete(0, 'end')
+        elif x == "%":
+            yuzde = True
+            try:
+                s1.append(self.giris.get())
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            self.giris.delete(0, 'end')
+        elif x == "x²":
+            try:
+                s1.append(f"({self.giris.get()})**2")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "x³":
+            try:
+                s1.append(f"({self.giris.get()})**3")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "√":
+            try:
+                s1.append(f"math.sqrt({self.giris.get()})")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "sin":
+            try:
+                s1.append(f"math.sin(math.radians({self.giris.get()}))")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "cos":
+            try:
+                s1.append(f"math.cos(math.radians({self.giris.get()}))")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "tan":
+            try:
+                s1.append(f"math.tan(math.radians({self.giris.get()}))")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "cot":
+            try:
+                s1.append(f"1/math.tan(math.radians({self.giris.get()}))")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "π":
+            self.yaz(math.pi)
+        elif x == "e":
+            self.yaz(math.e)
+        elif x == "log":
+            try:
+                s1.append(f"math.log10({self.giris.get()})")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x == "x!":
+            try:
+                s1.append(f"math.factorial({self.giris.get()})")
+            except ValueError:
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, "Hata")
+                return
+            hesap.append("")
+            self.hesapla()
+        elif x in "()":
+            self.yaz(x)
+        else:
+            self.giris.insert(END, x)
+
+    def hesapla(self):
+        global s1
+        global hesap
+        global yuzde
+        global yeni_islem
+
+        try:
+            if yuzde:
+                yuzde_degeri = float(self.giris.get())
+                s1[-1] = f"({s1[-1]}*{yuzde_degeri}/100)"
+                yuzde = False
+            else:
+                if len(hesap) == 0 or hesap[-1] != "":
+                    s1.append(self.giris.get())
+
+            hesap_str = "".join([f"{s1[i]}{hesap[i]}" for i in range(len(hesap))])
+            if len(s1) > len(hesap):
+                hesap_str += s1[-1]
+
+            sonuc = eval(hesap_str)
+            sonuc_str = str(sonuc)
+            if sonuc % 1 == 0:
+                sonuc_str = str(int(sonuc))
+
+            self.giris.delete(0, 'end')
+            self.giris.insert(0, sonuc_str)
+            hesap = []
+            s1 = []
+            yeni_islem = True
+        except (ValueError, SyntaxError):
+            self.giris.delete(0, 'end')
+            self.giris.insert(0, "Hata")
+            hesap = []
+            s1 = []
+            yeni_islem = True
+
+    def sil(self):
+        self.giris.delete(len(self.giris.get()) - 1)
+
+    def temizle(self):
+        global hesap
+        global s1
+        global yeni_islem
+        self.giris.delete(0, 'end')
+        hesap = []
+        s1 = []
+        yeni_islem = True
+
+    def klavye_islemleri(self, event):
+        if event.char in '0123456789':
+            self.yaz(event.char)
+        elif event.char in '+-*/%()':
+            self.islemler(event.char)
+        elif event.char == '\r':
+            self.hesapla()
+        elif event.char == '.':
+            self.yaz('.')
+            
+    def Octune(self,event):
+        a=self.giris.get()
+        try:
+            if a[:2]=='0x':
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, str(int(a, 16)))
+            elif a[:2]=='0b':
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, str(int(a, 2)))
+            elif a[:2]=='0o':
+                self.giris.delete(0, 'end')
+                self.giris.insert(0, str(int(a, 8)))
+        except:
+            pass
+
+    def goto_screen1(self):
+        self.master.withdraw()
+        screen1 = Screen1(tk.Toplevel(self.master))   
+
+    def goto_advanced(self):
+        self.master.withdraw()
+        AdvancedCalculator = AdvancedCalculator(tk.Toplevel(self.master))
+
+    def ikinci_pencere(self):
+        ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
+        ikinci_pencere.place(x=1, y=1, width=100, height=60)
+        label = tk.Label(ikinci_pencere, text="🟰", fg="purple", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=25, width=30, height=25)
+        destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=ikinci_pencere.destroy)
+        destroy_button.place(height=15, x=0, y=0)
+        scr1_button = tk.Button(ikinci_pencere, width=8, fg="black", font=("Roboto", 8), background='white', text="Calculator", command=self.goto_screen1)
+        scr1_button.place(height=18, x=1, y=30)
+                    
 
 
 class Screen2:
