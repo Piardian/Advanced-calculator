@@ -194,7 +194,7 @@ class Screen1:
     def ikinci_pencere(self):
      ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
      ikinci_pencere.place(x=1, y=1, width=100, height=230)
-     label = tk.Label(ikinci_pencere, text="√", fg="gray", bg="black", font=("Roboto", 15))
+     label = tk.Label(ikinci_pencere, text="√", fg="pink", bg="black", font=("Roboto", 15))
      label.place(x=60, y=25, width=30, height=25)  
      label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
      label.place(x=60, y=55, width=30, height=25)  
@@ -531,7 +531,7 @@ class AdvancedCalculator:
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=60)
+        ikinci_pencere.place(x=1, y=1, width=100, height=70)
         label = tk.Label(ikinci_pencere, text="🟰", fg="purple", bg="black", font=("Roboto", 15))
         label.place(x=60, y=25, width=30, height=25)
         destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=ikinci_pencere.destroy)
