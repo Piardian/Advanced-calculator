@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-
 # Küresel değişkenler
 hesap = []
 s1 = []
