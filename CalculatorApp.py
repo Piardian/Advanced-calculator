@@ -189,11 +189,15 @@ class Screen1:
 
     def goto_screen6(self):
         self.master.withdraw()
-        screen6 = Screen6(tk.Toplevel(self.master))   
+        screen6 = Screen6(tk.Toplevel(self.master))
+
+    def goto_screen7(self):
+        self.master.withdraw()
+        screen7 = Screen7(tk.Toplevel(self.master))       
     
     def ikinci_pencere(self):
      ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-     ikinci_pencere.place(x=1, y=1, width=100, height=245)
+     ikinci_pencere.place(x=1, y=1, width=100, height=280)
      label = tk.Label(ikinci_pencere, text="√", fg="pink", bg="black", font=("Roboto", 15))
      label.place(x=60, y=25, width=30, height=25)  
      label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
@@ -205,7 +209,9 @@ class Screen1:
      label = tk.Label(ikinci_pencere, text="💱", fg="lightgreen", bg="black", font=("Roboto", 15))
      label.place(x=60, y=165, width=30, height=25)  
      label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
-     label.place(x=60, y=203, width=30, height=25)  
+     label.place(x=60, y=203, width=30, height=25)
+     label = tk.Label(ikinci_pencere, text="🕙", fg="white", bg="black", font=("Roboto", 15))
+     label.place(x=60, y=235, width=30, height=25)  
     
      destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 7), background='white', command=ikinci_pencere.destroy)
      destroy_button.place(height=15, x=0, y=0)
@@ -220,7 +226,11 @@ class Screen1:
      scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Montserrat", 11), background='white', text="Cyrpto", command=self.goto_screen6)
      scr5_button.place(height=20, x=0, y=205)  
      scr6_button = tk.Button(ikinci_pencere, width=7, fg="black", font=("Helvetica", 9), background='white', text="Advanced", command=self.goto_advanced)
-     scr6_button.place(height=20, x=0, y=30)  
+     scr6_button.place(height=20, x=0, y=30)
+     scr7_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
+     scr7_button.place(height=20, x=0, y=240)
+     
+       
   
     def Octune(self, event):
         if event.char == 'O' or event.char == 'o':
@@ -733,11 +743,15 @@ class Screen2:
     
     def goto_screen5(self):
         self.master.withdraw()
-        screen5 = Screen5(tk.Toplevel(self.master))  
+        screen5 = Screen5(tk.Toplevel(self.master))
+
+    def goto_screen7(self):
+        self.master.withdraw()
+        screen7 = Screen7(tk.Toplevel(self.master))      
  
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=210)
+        ikinci_pencere.place(x=1, y=1, width=100, height=250)
         label = tk.Label(ikinci_pencere, text="🟰", fg="purple", bg="black", font=("Roboto", 15))
         label.place(x=60, y=25, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
@@ -748,6 +762,8 @@ class Screen2:
         label.place(x=60, y=130, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
         label.place(x=60, y=165, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="🕙", fg="white", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=200, width=30, height=25) 
 
         destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=ikinci_pencere.destroy)
         destroy_button.place(height=15, x=0, y=0)
@@ -761,6 +777,8 @@ class Screen2:
         scr4_button.place(height=18, x=1, y=135)  
         scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Montserrat", 11), background='white', text="Cyrpto", command=self.goto_screen6)
         scr5_button.place(height=18, x=1, y=170)
+        scr6_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
+        scr6_button.place(height=20, x=0, y=205)
         
 class Screen3:
     def __init__(self, master):
@@ -873,18 +891,7 @@ class Screen3:
              deger_metre = deger * 0.01
             elif birim1 == "Mililitre":
              deger_metre = deger * 0.001
-             # elif birim1 == "Mikrometre":
-             #     deger_metre = deger * 1e-6
-             # elif birim1 == "Nanometre":
-             #     deger_metre = deger * 1e-9
-             # elif birim1 == "Pikometre":
-             #     deger_metre = deger * 1e-12
-             # elif birim1 == "Femtometre":
-             #     deger_metre = deger * 1e-15
-             # elif birim1 == "Attometre":
-             #     deger_metre = deger * 1e-18
-             # elif birim1 == "Işık Yılı":
-             #     deger_metre = deger * 9.461e+15
+
             else:
                 sonuc = "Geçersiz birim"
                 self.sonuc_giris.delete(0, 'end')
@@ -933,15 +940,19 @@ class Screen3:
 
     def goto_screen5(self):
         self.master.withdraw()
-        screen5 = Screen5(tk.Toplevel(self.master))  
+        screen5 = Screen5(tk.Toplevel(self.master))
+
     def goto_screen6(self):
         self.master.withdraw()
         screen6 = Screen6(tk.Toplevel(self.master)) 
-
+    
+    def goto_screen7(self):
+        self.master.withdraw()
+        screen7 = Screen7(tk.Toplevel(self.master))
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=210)
+        ikinci_pencere.place(x=1, y=1, width=100, height=240)
         label = tk.Label(ikinci_pencere, text="🟰", fg="purple", bg="black", font=("Roboto", 15))
         label.place(x=60, y=25, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
@@ -952,6 +963,8 @@ class Screen3:
         label.place(x=60, y=130, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
         label.place(x=60, y=165, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="🕙", fg="white", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=200, width=30, height=25) 
 
         destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 7), background='white', command=ikinci_pencere.destroy)
         destroy_button.place(height=15, x=0, y=0)
@@ -965,6 +978,8 @@ class Screen3:
         scr3_button.place(height=20, x=0, y=135)
         scr4_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Open Sans", 11), background='white', text="Cyrpto", command=self.goto_screen6)
         scr4_button.place(height=20, x=0, y=170)
+        scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
+        scr5_button.place(height=20, x=0, y=205)
 
 class Screen4:
     def __init__(self, master):
@@ -1129,7 +1144,11 @@ class Screen4:
         
     def goto_screen6(self):
         self.master.withdraw()
-        screen6 = Screen6(tk.Toplevel(self.master))           
+        screen6 = Screen6(tk.Toplevel(self.master))
+
+    def goto_screen7(self):
+        self.master.withdraw()
+        screen7 = Screen7(tk.Toplevel(self.master))               
 
         self.master.bind("<Return>", lambda event: self.birim_donustur())
         self.master.bind("<BackSpace>", lambda event: self.sil())
@@ -1146,7 +1165,7 @@ class Screen4:
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=210)
+        ikinci_pencere.place(x=1, y=1, width=100, height=240)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
         label.place(x=60, y=60, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
@@ -1157,7 +1176,9 @@ class Screen4:
         label.place(x=60, y=130, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
         label.place(x=60, y=165, width=30, height=25)
-
+        label = tk.Label(ikinci_pencere, text="🕙", fg="white", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=200, width=30, height=25) 
+ 
         destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 7), background='white', command=ikinci_pencere.destroy)
         destroy_button.place(height=15, x=0, y=0)
         scr5_button = tk.Button(ikinci_pencere, width=8, fg="black", font=("Montserrat", 8), background='white', text="Calculator", command=self.goto_screen1)
@@ -1170,6 +1191,8 @@ class Screen4:
         scr3_button.place(height=20, x=0, y=135)
         scr4_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Open Sans", 11), background='white', text="Cyrpto", command=self.goto_screen6)
         scr4_button.place(height=20, x=0, y=170)
+        scr5_button = tk.Button(ikinci_pencere, width5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
+        scr5_button.place(height=20, x=0, y=205)
                  
         
 class Screen5:
@@ -1358,11 +1381,15 @@ class Screen5:
 
     def goto_screen6(self):
         self.master.withdraw()
-        screen6 = Screen6(tk.Toplevel(self.master))           
+        screen6 = Screen6(tk.Toplevel(self.master))
+
+    def goto_screen7(self):
+        self.master.withdraw()
+        screen7 = Screen7(tk.Toplevel(self.master))                
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=210)
+        ikinci_pencere.place(x=1, y=1, width=100, height=240)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
         label.place(x=60, y=60, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
@@ -1373,6 +1400,9 @@ class Screen5:
         label.place(x=60, y=25, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
         label.place(x=60, y=165, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="🕙", fg="white", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=200, width=30, height=25)
+
 
         destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 7), background='white', command=ikinci_pencere.destroy)
         destroy_button.place(height=15, x=0, y=0)
@@ -1386,6 +1416,8 @@ class Screen5:
         scr3_button.place(height=20, x=0, y=135)
         scr4_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Open Sans", 11), background='white', text="Cyrpto", command=self.goto_screen6)
         scr4_button.place(height=20, x=0, y=170)
+        scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
+        scr5_button.place(height=20, x=0, y=205)
                  
 class Screen6:
 
@@ -1570,11 +1602,15 @@ class Screen6:
 
     def goto_screen5(self):
         self.master.withdraw()
-        screen5 = Screen5(tk.Toplevel(self.master))       
+        screen5 = Screen5(tk.Toplevel(self.master))
+
+    def goto_screen7(self):
+        self.master.withdraw()
+        screen7 = Screen7(tk.Toplevel(self.master))           
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=210)
+        ikinci_pencere.place(x=1, y=1, width=100, height=240)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
         label.place(x=60, y=60, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
@@ -1585,6 +1621,8 @@ class Screen6:
         label.place(x=60, y=165, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="🟰", fg="purple", bg="black", font=("Roboto", 15))
         label.place(x=60, y=25, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="🕙", fg="white", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=200, width=30, height=25)
 
         destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 7), background='white', command=ikinci_pencere.destroy)
         destroy_button.place(height=15, x=0, y=0)
@@ -1597,7 +1635,221 @@ class Screen6:
         scr3_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Lato", 11), background='white', text="Mass", command=self.goto_screen4)
         scr3_button.place(height=20, x=0, y=135)
         scr4_button = tk.Button(ikinci_pencere, width=8, fg="black", font=("Open Sans", 8), background='white', text="Exchange", command=self.goto_screen5)
-        scr4_button.place(height=20, x=0, y=170)  
+        scr4_button.place(height=20, x=0, y=170)
+        scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
+        scr5_button.place(height=20, x=0, y=205)
+          
+
+class Screen7:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Lenght")
+        self.master.geometry("293x460")
+        self.master.configure(background='black')
+        self.master.resizable(width=False, height=False)
+
+        self.giris = tk.Entry(self.master, width=29,  justify=tk.RIGHT, font=('Helvetica', 16))
+        self.giris.place(height=60, width=265, x=15, y=22)
+
+        # Sonuç alanı
+        self.sonuc_giris = ttk.Entry(self.master, width=29, justify=tk.RIGHT, font=("Helvetica", 16))
+        self.sonuc_giris.place(height=60, width=265, x=15, y=90)
+
+        # Seçim baloncuğu için bir StringVar oluştur
+        self.secim_var1 = tk.StringVar()
+        self.secim_var2 = tk.StringVar()
+
+        # Seçenekler listesi
+        secenekler = ["Salise", "Saniye", "Dakika", "Saat", "Gün", "Hafta", "Ay", "Yıl", "Yüzyıl"]
+
+
+        # 1. Combobox (Seçim baloncuğu) oluştur
+        self.combobox1 = ttk.Combobox(self.master, textvariable=self.secim_var1, values=secenekler, state="readonly")
+        self.combobox1.bind("<<ComboboxSelected>>", self.secim_degisti)
+        self.combobox1.place(width=83, height=17, x=15, y=64)
+
+        # 2. Combobox (Seçim baloncuğu) oluştur
+        self.combobox2 = ttk.Combobox(self.master, textvariable=self.secim_var2, values=secenekler, state="readonly")
+        self.combobox2.bind("<<ComboboxSelected>>", self.secim_degisti)
+        self.combobox2.place(width=83, height=17, x=15, y=132)
+       
+        
+        buttons = [
+            {"text": "Dönüştür", "command": self.birim_donustur, "x": 145, "y": 400, "width": 10},
+            {"text": "C", "command": self.temizle, "x": 105, "y": 160},
+            {"text": "⌫", "command": self.sil, "x": 195, "y": 160},
+            {"text": "1", "command": lambda: self.yaz(1), "x": 15, "y": 220},
+            {"text": "2", "command": lambda: self.yaz(2), "x": 105, "y": 220},
+            {"text": "3", "command": lambda: self.yaz(3), "x": 195, "y": 220},
+            {"text": "4", "command": lambda: self.yaz(4), "x": 15, "y": 280},
+            {"text": "5", "command": lambda: self.yaz(5), "x": 105, "y": 280},
+            {"text": "6", "command": lambda: self.yaz(6), "x": 195, "y": 280},
+            {"text": "7", "command": lambda: self.yaz(7), "x": 15, "y": 340},
+            {"text": "8", "command": lambda: self.yaz(8), "x": 105, "y": 340},
+            {"text": "9", "command": lambda: self.yaz(9), "x": 195, "y": 340},
+            {"text": ".", "command": lambda: self.yaz("."), "x": 15, "y": 160},
+            {"text": "0", "command": lambda: self.yaz(0), "x": 17, "y": 400, "width": 9}
+        ]
+
+        for button in buttons:
+            ttk.Button(
+                self.master, 
+                text=button["text"], 
+                command=button["command"], 
+                width=button.get("width", 6)
+            ).place(height=44, x=button["x"], y=button["y"])
+
+
+        style = ttk.Style()
+        style.configure('TButton', font=('Helvetica', 16))
+
+        self.ikinci_pencere_button = tk.Button(master, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=self.ikinci_pencere)
+        self.ikinci_pencere_button.place(height=15, x=1, y=1)
+
+    def yaz(self, x):
+        self.giris.insert(tk.END, str(x))
+
+    def secim_degisti(self, event):
+        secilen1 = self.secim_var1.get()
+        secilen2 = self.secim_var2.get()
+        print(f"Seçilen 1: {secilen1}")
+        print(f"Seçilen 2: {secilen2}")
+
+    def sil(self):
+        self.giris.delete(len(self.giris.get()) - 1)
+
+    def temizle(self):
+        self.giris.delete(0, tk.END)
+        self.sonuc_giris.delete(0, tk.END)
+
+    def goto_screen1(self):
+        self.master.withdraw()
+        screen1 = Screen1(tk.Toplevel(self.master))
+
+    def goto_screen3(self):
+        self.master.withdraw()
+        screen3 = Screen3(tk.Toplevel(self.master))
+
+    
+    def goto_screen5(self):
+        self.master.withdraw()
+        screen5 = Screen5(tk.Toplevel(self.master))
+
+    def goto_screen6(self):
+        self.master.withdraw()
+        screen6 = Screen6(tk.Toplevel(self.master))        
+
+    def birim_donustur(self):
+        try:
+            deger = float(self.giris.get())
+            birim1 = self.secim_var1.get()
+            birim2 = self.secim_var2.get()
+            # Önce birimi metreye çevir
+            if birim1 == "Salise":
+                deger_saniye = deger * 1e-3
+            elif birim1 == "Saniye":
+                deger_saniye = deger
+            elif birim1 == "Dakika":
+                deger_saniye = deger * 60
+            elif birim1 == "Saat":
+                deger_saniye = deger * 3600
+            elif birim1 == "Gün":
+                deger_saniye = deger * 86400
+            elif birim1 == "Hafta":
+                deger_saniye = deger * 604800
+            elif birim1 == "Ay":
+                deger_saniye = deger * 2.628e+6  # Ortalama 30.44 gün
+            elif birim1 == "Yıl":
+                deger_saniye = deger * 3.154e+7  # Ortalama yıl uzunluğu
+            elif birim1 == "Yüzyıl":
+                deger_saniye = deger * 3.154e+9  # Ortalama 100 yıl
+            else:
+                sonuc = "Geçersiz birim"
+                self.sonuc_giris.delete(0, 'end')
+                self.sonuc_giris.insert(0, sonuc)
+                return
+
+            # Saniyeden hedef birime çevir
+            if birim2 == "Salise":
+                sonuc = deger_saniye / 1e-3
+            elif birim2 == "Saniye":
+                sonuc = deger_saniye
+            elif birim2 == "Dakika":
+                sonuc = deger_saniye / 60
+            elif birim2 == "Saat":
+                sonuc = deger_saniye / 3600
+            elif birim2 == "Gün":
+                sonuc = deger_saniye / 86400
+            elif birim2 == "Hafta":
+                sonuc = deger_saniye / 604800
+            elif birim2 == "Ay":
+                sonuc = deger_saniye / 2.628e+6  # Ortalama 30.44 gün
+            elif birim2 == "Yıl":
+                sonuc = deger_saniye / 3.154e+7  # Ortalama yıl uzunluğu
+            elif birim2 == "Yüzyıl":
+                sonuc = deger_saniye / 3.154e+9  # Ortalama 100 yıl
+            else:
+                sonuc = "Geçersiz birim"
+
+            self.sonuc_giris.delete(0, 'end')
+            self.sonuc_giris.insert(0, str(sonuc))
+        except ValueError:
+            self.sonuc_giris.delete(0, 'end')
+            self.sonuc_giris.insert(0, "Geçersiz giriş")
+
+        self.master.bind("<Return>", lambda event: self.birim_donustur())
+        self.master.bind("<BackSpace>", lambda event: self.sil())
+        self.master.bind("<KP_Enter>", lambda event: self.birim_donustur())
+        self.master.bind("<Key>", lambda event: self.klavye_islemleri(event))
+
+    def klavye_islemleri(self, event):
+        if event.char in '0123456789':
+            self.yaz(event.char)
+        elif event.char == '\r':
+            self.birim_donustur()
+        elif event.char == '.':
+            self.yaz('.')
+
+
+    def goto_screen4(self):
+        self.master.withdraw()
+        screen4 = Screen4(tk.Toplevel(self.master))    
+    
+    def goto_screen2(self):
+        self.master.withdraw()
+        screen2 = Screen2(tk.Toplevel(self.master))  
+ 
+    def ikinci_pencere(self):
+        ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
+        ikinci_pencere.place(x=1, y=1, width=100, height=250)
+        label = tk.Label(ikinci_pencere, text="🟰", fg="purple", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=25, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=60, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=95, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="⚖️", fg="gray", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=130, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="💱", fg="lightgreen", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=165, width=30, height=25)
+        label = tk.Label(ikinci_pencere, text="₿", fg="orange", bg="black", font=("Roboto", 15))
+        label.place(x=60, y=203, width=30, height=25)
+        
+
+        destroy_button = tk.Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=ikinci_pencere.destroy)
+        destroy_button.place(height=15, x=0, y=0)
+        scr1_button = tk.Button(ikinci_pencere, width=8, fg="black", font=("Roboto", 8), background='white', text="Calculator", command=self.goto_screen1)
+        scr1_button.place(height=18, x=1, y=30)
+        scr2_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Futura", 11), background='white', text="Liquid ", command=self.goto_screen3)
+        scr2_button.place(height=18, x=1, y=100)
+        scr3_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Lato", 11), background='white', text="Mass", command=self.goto_screen4)
+        scr3_button.place(height=18, x=1, y=135)
+        scr4_button = tk.Button(ikinci_pencere, width=8, fg="black", font=("Open Sans", 8), background='white', text="Exchange", command=self.goto_screen5)
+        scr4_button.place(height=18, x=1, y=170)  
+        scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Montserrat", 11), background='white', text="Cyrpto", command=self.goto_screen6)
+        scr5_button.place(height=18, x=1, y=205)
+        scr1_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Roboto", 11), background='white', text="Length", command=self.goto_screen2)
+        scr1_button.place(height=20, x=0, y=65)         
         
                  
 
