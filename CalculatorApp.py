@@ -941,7 +941,7 @@ class Screen3:
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=200)
+        ikinci_pencere.place(x=1, y=1, width=100, height=210)
         label = tk.Label(ikinci_pencere, text="🟰", fg="purple", bg="black", font=("Roboto", 15))
         label.place(x=60, y=25, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
@@ -1146,7 +1146,7 @@ class Screen4:
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=200)
+        ikinci_pencere.place(x=1, y=1, width=100, height=210)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
         label.place(x=60, y=60, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
@@ -1362,7 +1362,7 @@ class Screen5:
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=200)
+        ikinci_pencere.place(x=1, y=1, width=100, height=210)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
         label.place(x=60, y=60, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
@@ -1574,7 +1574,7 @@ class Screen6:
 
     def ikinci_pencere(self):
         ikinci_pencere = tk.Frame(self.master, bg="black", bd=2, relief="sunken")
-        ikinci_pencere.place(x=1, y=1, width=100, height=200)
+        ikinci_pencere.place(x=1, y=1, width=100, height=210)
         label = tk.Label(ikinci_pencere, text="📏", fg="white", bg="black", font=("Roboto", 15))
         label.place(x=60, y=60, width=30, height=25)
         label = tk.Label(ikinci_pencere, text="💧", fg="lightblue", bg="black", font=("Roboto", 15))
