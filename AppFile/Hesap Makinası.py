@@ -6,7 +6,7 @@ hesap = []
 s1 = []
 yeni_islem = True
 yuzde = False
-
+gecmis = []
 def yaz(x):
     global yeni_islem
     if yeni_islem:
@@ -51,7 +51,7 @@ def hesapla():
     global hesap
     global yuzde
     global yeni_islem
-
+    global gecmis
     try:
         if yuzde:
             yuzde_degeri = float(giris.get())
@@ -82,7 +82,11 @@ def hesapla():
         sonuc_str = str(sonuc)
         if sonuc % 1 == 0:
             sonuc_str = str(int(sonuc))
+        # İşlem geçmişine ekleme
 
+        islem_str = ' '.join(f"{s1[i]} {hesap[i]}" for i in range(len(hesap))) + f" {s1[-1]} = {sonuc_str}"
+
+        gecmis.append(islem_str)
         giris.delete(0, 'end')
         giris.insert(0, sonuc_str)
         hesap = []
@@ -120,6 +124,32 @@ def ikinci_pencere():
     Label=tk.Label(ikinci_pencere, text="Pia",fg="red",bg="black",font=("Times", 24))
     Label.place(x=15, y=35,width=40, height=30)
     Button(ikinci_pencere, width=1, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere.destroy).place(height=15,x=1, y=1)
+
+def gecmisi_goster():
+    global gecmis
+    gecmisi_goster =tk.Frame(window,bg="black")
+    gecmisi_goster.place(x=180, y=0,width=140, height=200)
+    
+
+    listbox = tk.Listbox(gecmisi_goster,width=18 ,fg="white",bd=0,bg="black",background="black",relief="flat",highlightbackground="black",highlightcolor="black")
+    listbox.pack(expand=True, fill='both')
+    listbox.place(x=3, y=25)
+    
+    for item in gecmis:
+        listbox.insert(END, item)
+
+    def kopyala():
+        secilen = listbox.get(listbox.curselection())
+        giris.delete(0, 'end')
+        giris.insert(0, secilen.split(' = ')[0])
+        gecmisi_goster.destroy()
+
+    Button(gecmisi_goster, width=8, text="Kopyala", fg="white", font=("Helvetica", 13),  background='black',highlightbackground="black",highlightcolor="black",highlightthickness=0,relief="flat",command=kopyala).place(height=18,x=20, y=170)
+   
+    
+    Button(gecmisi_goster, width=1, text="⟳", fg="white", font=('FontAwesome', 9),  background='black',highlightbackground="black",highlightcolor="black",highlightthickness=2,relief="flat",command=gecmisi_goster.destroy).place(height=15,x=92, y=2)
+    
+
 
 giris = tk.Entry(window, width=29, bd=4, justify=RIGHT, font=('Times', 19))
 giris.place(height=60, width=275, x=13, y=20)
@@ -176,7 +206,8 @@ for button in buttons:
     width = button.get("width", 4)
     ttk.Button(window, width=width, text=button["text"], command=button["command"]).place(height=44, x=button["pos"][0], y=button["pos"][1])
 Button(window, width=1, text="...", fg="black", font=("Helvetica", 9),  background='white',command=ikinci_pencere).place(height=15,x=1, y=1)
-
+Button(window, width=1,  text="⟳", fg="white", font=('FontAwesome', 9),  background='black',highlightbackground="black",highlightcolor="black",
+       highlightthickness=0,relief="flat",command=gecmisi_goster).place(height=15,x=275, y=3)
 # Klavye bağlamaları
 window.bind("<Return>", lambda event: hesapla())
 window.bind("<KP_Divide>", lambda event: islemler("/"))

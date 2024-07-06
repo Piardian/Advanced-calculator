@@ -3,12 +3,13 @@ from tkinter import *
 from tkinter import ttk
 import requests
 import math
+from datetime import datetime, timedelta
 # Küresel değişkenler
 hesap = []
 s1 = []
 yeni_islem = True
 yuzde = False
-
+gecmis = []
 class Screen1:
     def __init__(self, master):
         self.master = master
@@ -65,7 +66,8 @@ class Screen1:
             ttk.Button(self.master, width=width, text=button["text"], command=button["command"]).place(height=44, x=button["pos"][0], y=button["pos"][1])
 
         Button(self.master, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=self.ikinci_pencere).place(height=15, x=1, y=1)
-        
+        Button(self.master, width=1,  text="⟳", fg="white", font=('FontAwesome', 9),  background='black',highlightbackground="black",highlightcolor="black",
+        highlightthickness=0,relief="flat",command=self.gecmisi_goster).place(height=15,x=275, y=3)
 
     def yaz(self, x):
         global yeni_islem
@@ -111,6 +113,7 @@ class Screen1:
         global hesap
         global yuzde
         global yeni_islem
+        global gecmis
 
         try:
             if yuzde:
@@ -138,10 +141,14 @@ class Screen1:
                         return
                 elif hesap[i-1] == '*':
                     sonuc *= s1[i]
-
+            if sonuc.is_integer():
+             sonuc = int(sonuc)
             sonuc_str = str(sonuc)
             if sonuc % 1 == 0:
                 sonuc_str = str(int(sonuc))
+            islem_str = ' '.join(f"{s1[i]} {hesap[i]}" for i in range(len(hesap))) + f" {s1[-1]} = {sonuc_str}"
+
+            gecmis.append(islem_str)
 
             self.giris.delete(0, 'end')
             self.giris.insert(0, sonuc_str)
@@ -230,8 +237,35 @@ class Screen1:
      scr7_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
      scr7_button.place(height=20, x=0, y=240)
      
-       
-  
+    
+    
+    def gecmisi_goster(self):
+     
+        global gecmis
+
+        gecmisi_goster =tk.Frame(self.master,bg="black")
+        gecmisi_goster.place(x=180, y=0,width=140, height=200)
+    
+
+        listbox = tk.Listbox(gecmisi_goster,width=20,font=("Montserrat", 9),fg="white",bd=0,bg="black",background="black",relief="flat",highlightbackground="black",highlightcolor="black")
+        listbox.pack(expand=True, fill='both')
+        listbox.place(x=3, y=20)
+    
+        for item in gecmis:
+         listbox.insert(END, item)
+
+        def kopyala(self):
+            self.giris.delete(0, 'end')
+            secilen = listbox.get(listbox.curselection())
+            self.giris.insert(0, secilen.split(' = ')[0])
+            gecmisi_goster.destroy()
+
+        Button(gecmisi_goster, width=8, text="Kopyala", fg="white", font=("Helvetica", 13),  background='black',highlightbackground="black",highlightcolor="black",highlightthickness=0,relief="flat",command=kopyala).place(height=18,x=20, y=170)
+   
+    
+        Button(gecmisi_goster, width=1, text="⟳", fg="white", font=('FontAwesome', 9),  background='black',highlightbackground="black",highlightcolor="black",highlightthickness=2,relief="flat",command=gecmisi_goster.destroy).place(height=15,x=92, y=2)
+    
+    
     def Octune(self, event):
         if event.char == 'O' or event.char == 'o':
             self.giris.insert(tk.END, "Ez")
@@ -329,7 +363,7 @@ class AdvancedCalculator:
             ttk.Button(self.master, width=width, text=button["text"], command=button["command"]).place(height=44, x=button["pos"][0], y=button["pos"][1])
             self.ikinci_pencere_button = tk.Button(master, width=1, text="...", fg="black", font=("Helvetica", 9), background='white', command=self.ikinci_pencere)
             self.ikinci_pencere_button.place(height=15, x=1, y=1)
-
+            
         
 
     def yaz(self, x):
@@ -1191,7 +1225,7 @@ class Screen4:
         scr3_button.place(height=20, x=0, y=135)
         scr4_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Open Sans", 11), background='white', text="Cyrpto", command=self.goto_screen6)
         scr4_button.place(height=20, x=0, y=170)
-        scr5_button = tk.Button(ikinci_pencere, width5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
+        scr5_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Helvetica", 12), background='white', text="Time", command=self.goto_screen7)
         scr5_button.place(height=20, x=0, y=205)
                  
         
@@ -1851,7 +1885,104 @@ class Screen7:
         scr1_button = tk.Button(ikinci_pencere, width=5, fg="black", font=("Roboto", 11), background='white', text="Length", command=self.goto_screen2)
         scr1_button.place(height=20, x=0, y=65)         
         
-                 
+class Screen8:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Tarih Hesaplayıcı")
+        self.master.geometry("293x460")
+        self.master.configure(background='black')
+        self.master.resizable(width=False, height=False)
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        # Başlangıç tarihi girişi
+        self.start_date_label = tk.Label(self.master, text="Başlangıç Tarihi:", bg='black', fg='white')
+        self.start_date_label.place(x=15, y=20)
+        self.start_date_entry = tk.Entry(self.master, width=20)
+        self.start_date_entry.place(x=15, y=40)
+        self.start_date_entry.insert(0, datetime.now().strftime("%d.%m.%Y"))
+
+        # Gün sayısı girişi
+        self.days_label = tk.Label(self.master, text="Gün Sayısı:", bg='black', fg='white')
+        self.days_label.place(x=15, y=70)
+        self.days_entry = tk.Entry(self.master, width=20)
+        self.days_entry.place(x=15, y=90)
+
+        # Sonuç alanı
+        self.result_label = tk.Label(self.master, text="Sonuç:", bg='black', fg='white')
+        self.result_label.place(x=15, y=120)
+        self.result_entry = tk.Entry(self.master, width=29, justify=tk.RIGHT, font=("Helvetica", 12))
+        self.result_entry.place(x=15, y=140, height=40, width=265)
+
+        # İşlem düğmeleri
+        ttk.Button(self.master, text="İleri", command=self.add_days).place(x=15, y=190, width=80)
+        ttk.Button(self.master, text="Geri", command=self.subtract_days).place(x=105, y=190, width=80)
+        ttk.Button(self.master, text="Fark Hesapla", command=self.calculate_difference).place(x=195, y=190, width=80)
+
+        # Sayı tuşları
+        buttons = [
+            {"text": "7", "x": 15, "y": 230},
+            {"text": "8", "x": 105, "y": 230},
+            {"text": "9", "x": 195, "y": 230},
+            {"text": "4", "x": 15, "y": 280},
+            {"text": "5", "x": 105, "y": 280},
+            {"text": "6", "x": 195, "y": 280},
+            {"text": "1", "x": 15, "y": 330},
+            {"text": "2", "x": 105, "y": 330},
+            {"text": "3", "x": 195, "y": 330},
+            {"text": "0", "x": 15, "y": 380},
+            {"text": ".", "x": 105, "y": 380},
+            {"text": "C", "x": 195, "y": 380}
+        ]
+
+        for button in buttons:
+            ttk.Button(
+                self.master, 
+                text=button["text"], 
+                command=lambda x=button["text"]: self.button_click(x),
+                width=6
+            ).place(height=44, x=button["x"], y=button["y"])
+
+    def button_click(self, value):
+        if value == 'C':
+            self.days_entry.delete(0, tk.END)
+        else:
+            self.days_entry.insert(tk.END, value)
+
+    def add_days(self):
+        try:
+            start_date = datetime.strptime(self.start_date_entry.get(), "%d.%m.%Y")
+            days = int(self.days_entry.get())
+            result_date = start_date + timedelta(days=days)
+            self.result_entry.delete(0, tk.END)
+            self.result_entry.insert(0, result_date.strftime("%d.%m.%Y"))
+        except ValueError:
+            self.result_entry.delete(0, tk.END)
+            self.result_entry.insert(0, "Hatalı giriş")
+
+    def subtract_days(self):
+        try:
+            start_date = datetime.strptime(self.start_date_entry.get(), "%d.%m.%Y")
+            days = int(self.days_entry.get())
+            result_date = start_date - timedelta(days=days)
+            self.result_entry.delete(0, tk.END)
+            self.result_entry.insert(0, result_date.strftime("%d.%m.%Y"))
+        except ValueError:
+            self.result_entry.delete(0, tk.END)
+            self.result_entry.insert(0, "Hatalı giriş")
+
+    def calculate_difference(self):
+        try:
+            start_date = datetime.strptime(self.start_date_entry.get(), "%d.%m.%Y")
+            end_date = datetime.strptime(self.days_entry.get(), "%d.%m.%Y")
+            difference = abs((end_date - start_date).days)
+            self.result_entry.delete(0, tk.END)
+            self.result_entry.insert(0, f"{difference} gün")
+        except ValueError:
+            self.result_entry.delete(0, tk.END)
+            self.result_entry.insert(0, "Hatalı giriş")
+
 
 root = tk.Tk()
 screen1 = Screen1(root)
